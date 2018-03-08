@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#### These are the parameters used for submitting the script in the department cluster
+#$ -cwd
+#$ -S /bin/bash
+#$ -j y
+#$ -l h_vmem=8G
+#$ -m beas
+#$ -M maricris.zaidem@tuebingen.mpg.de
+#$ -V
+
+
+for f in 1_RunId0195_LaneId1 2_RunId0195_LaneId1 3_RunId0195_LaneId1 4_RunId0195_LaneId1 5_RunId0195_LaneId1 6_RunId0195_LaneId1 7_RunId0195_LaneId1 8_RunId0195_LaneId1 9_RunId0195_LaneId1 10_RunId0195_LaneId1 11_RunId0195_LaneId1 12_RunId0195_LaneId1 13_RunId0195_LaneId1 
+do 
+
+bowtie2 --local -D 15 -R 2 -N 0 -L 20 -i S,1,0.75 -q -x/ebio/abt6_projects8/IRRI_transcriptomes_drought/data/ZMBP_collaboration/ATH_reference_cDNA/1408351686.fas.1_index -U /ebio/abt6_projects8/IRRI_transcriptomes_drought/data/ZMBP_collaboration/data_ZMBP/fastq_imported/Cris-ZMBP-"$f".fastq  -S /ebio/abt6_projects8/IRRI_transcriptomes_drought/data/ZMBP_collaboration/data_ZMBP/bowtie2_sam/nr_align_sam/Cris-ZMBP-"$f".sam > error1a.out 2>&1 > error1a.log
+
+done
