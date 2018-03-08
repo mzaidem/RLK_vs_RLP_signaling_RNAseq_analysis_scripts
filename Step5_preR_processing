@@ -1,0 +1,24 @@
+#!/bin/bash
+
+######## awk sort of xprs result for acceptable edgeR file generation
+
+EXPRESS=/ebio/abt6_projects8/IRRI_transcriptomes_drought/data/ZMBP_collaboration/data_ZMBP/express_output/nr_express_output
+FORR=/ebio/abt6_projects8/IRRI_transcriptomes_drought/data/ZMBP_collaboration/data_ZMBP/post-express_for-R/nr_post-express_for-R
+
+
+for f in 1_RunId0195_LaneId1 2_RunId0195_LaneId1 3_RunId0195_LaneId1 4_RunId0195_LaneId1 5_RunId0195_LaneId1 6_RunId0195_LaneId1 7_RunId0195_LaneId1 8_RunId0195_LaneId1 9_RunId0195_LaneId1 10_RunId0195_LaneId1 11_RunId0195_LaneId1 12_RunId0195_LaneId1 13_RunId0195_LaneId1 
+do 
+
+
+awk '{print $2"\t"$6}' $EXPRESS/Cris-ZMBP-"$f"/results.xprs | sort -k1  > $EXPRESS/Cris-ZMBP-"$f"/sorted_results.xprs
+
+sed '/target_id/d' $EXPRESS/Cris-ZMBP-"$f"/sorted_results.xprs > $EXPRESS/Cris-ZMBP-"$f"/sorted_results_nh.xprs
+
+cat $EXPRESS/header_xprs_sorted $EXPRESS/Cris-ZMBP-"$f"/sorted_results_nh.xprs > $FORR/Cris-ZMBP-"$f"_for-R.xprs
+
+### converts .xprs file to .txt and alot them in the proper folder
+cp $FORR/Cris-ZMBP-"$f"_for-R.xprs $FORR/txt_files/Cris-ZMBP-"$f"_for-R.xprs
+mv $FORR/txt_files/Cris-ZMBP-"$f"_for-R.xprs $FORR/txt_files/"$f".txt
+
+done
+
