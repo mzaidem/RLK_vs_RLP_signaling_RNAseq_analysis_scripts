@@ -1,0 +1,8 @@
+######## built an reference (cDNA TAIR10) index for bowtie2 
+. ~/.bashrc #sourced my bashrc profile first
+
+#### This reference was previously downloaded from the TAIR website
+bowtie2-build TAIR10_cdna_20101214_updated TAIR10_cdna_20101214_updated_index
+
+#### This reference is from CD-HIT clustering of the TAIR10 cDNA sequences
+bowtie2-build 1408351686.fas.1 1408351686.fas.1_index
